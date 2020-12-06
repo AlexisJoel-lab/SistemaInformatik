@@ -2,9 +2,9 @@
 @section('content')
 
 <main class="w-full flex-grow p-6">
-    <h1 class="text-3xl text-black pb-6">{{ __('Productos') }}</h1>
+    <h1 class="text-3xl text-black pb-6">{{ __('Grabador') }}</h1>
     
-    <a href="{{ route('productos.create') }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
+    <a href="{{ route('grabadors.create') }}" class="bg-blue-500 hover:bg-blue-400 text-white font-bold py-2 px-4 border-b-4 border-blue-700 hover:border-blue-500 rounded">
         <i class="fas fa-plus mr-2"></i>{{ __('Nuevo')}}
     </a>
 
@@ -37,23 +37,21 @@
                         <th class="w-1/5 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Nombre del producto')}}</th>
                         <th class="w-1/2 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Descripción')}}</th>
                         <th class="w-30 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Precio')}}</th>
-                        <th class="w-50 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Categoria')}}</th>
                         <th class="w-2/5 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Acciones')}}</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">
-                @foreach($productos as $item)            
+                @foreach($grabadors as $item)            
                         <tr>
                             <th scope="row">{{ $item->id }}</th>
                             <td class="text-center"><a href="#">{{ $item->nombre }}</a></td>
                             <td>{{ $item->descripcion }}</td>
                             <td>S/. {{ $item->precio }}</td>
-                            <td>{{ $item->categoria_id}}</td>
                             <td class="flex justify-center content-center">
-                                <a href="{{route('productos.edit',['producto' => $item])}}" class="bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded">
+                                <a href="{{route('grabadors.edit',['grabador' => $item])}}" class="bg-yellow-400 hover:bg-yellow-300 text-white font-bold py-2 px-4 border-b-4 border-yellow-700 hover:border-yellow-500 rounded">
                                     <i class="fas fa-pencil-alt xl:mr-2"></i><samp class="hidden xl:inline">{{__('Editar')}}</samp>
                                 </a>
-                                <form action="{{route('productos.destroy',['producto' => $item])}}" method="POST" class="form-eliminar inline px-1">
+                                <form action="{{route('grabadors.destroy',['grabador' => $item])}}" method="POST" class="form-eliminar inline px-1">
                                     @method('DELETE')
                                     @csrf
                                     <button class="bg-red-500 hover:bg-red-400 text-white font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded focus:outline-none" type="submit">
@@ -66,9 +64,9 @@
                 </tbody>                
             </table>
             <br>
-            @if($productos->count())
+            @if($grabadors->count())
                 <div class="mt-3">
-                    {{$productos->links()}}
+                    {{$grabadors->links()}}
                 </div>
             @endif 
         </div>        

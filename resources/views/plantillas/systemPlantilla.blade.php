@@ -34,14 +34,31 @@
                 <i class="fas fa-tachometer-alt mr-3"></i>
                 {{ __('Inicio') }}
             </a>
+            <a href="{{route('users.index')}}" class="flex items-center text-white py-4 pl-6 nav-item {{request()->is('usuarios') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }}">
+                <i class="fas fa-user mr-3"></i>
+                {{ __('Usuarios') }}
+            </a>
             <a href="{{route('categorias.index')}}" class="flex items-center text-white py-4 pl-6 nav-item {{request()->is('categorias') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }}">
                 <i class="fas fa-tag mr-3"></i>
                 {{ __('Categorías') }}
             </a>
-            <a href="{{route('productos.index')}}" class="flex items-center text-white py-4 pl-6 nav-item {{request()->is('productos') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }}">
-                <i class="fas fa-box-open mr-3"></i>
-                {{ __('Productos') }}
-            </a>
+            <div>
+                <button type="button" class="w-full flex items-center text-white py-4 pl-6 nav-item {{request()->is('productos') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }} focus:outline-none" id="options-menu" aria-haspopup="true" aria-expanded="true" onclick="showMenu();">
+                    <i class="fas fa-dolly-flatbed mr-3"></i>    
+                        {{ __('Productos') }}
+                    <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </div>
+            <div class="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-sidebar ring-1 ring-black ring-opacity-5">
+                <div class="py-1 dropdownContent" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                    <a href="{{route('grabadors.index')}}" class="submenu block pl-15 py-2 text-sm items-center text-white nav-item {{request()->is('grabadors') ? 'active-nav-link' : 'opacity-75 hover:opacity-100'}}" role="menuitem">{{ __('Grabadores') }}</a>
+                    <a href="{{route('hdds.index')}}" class="submenu block pl-15 py-2 text-sm items-center text-white nav-item {{request()->is('hdds') ? 'active-nav-link' : 'opacity-75 hover:opacity-100'}}" role="menuitem">{{ __('Disco Duro') }}</a>
+                    <a href="{{route('camExternas.index')}}" class="submenu block pl-15 py-2 text-sm items-center text-white nav-item {{request()->is('camExternas') ? 'active-nav-link' : 'opacity-75 hover:opacity-100'}}" role="menuitem">{{ __('Cámaras Externas') }}</a>
+                    <a href="{{route('camInternas.index')}}" class="submenu block pl-15 py-2 text-sm items-center text-white nav-item {{request()->is('camInternas') ? 'active-nav-link' : 'opacity-75 hover:opacity-100'}}" role="menuitem">{{ __('Cámaras Internas') }}</a>
+                </div>
+            </div>
         </nav>
     </aside>
 
@@ -120,6 +137,10 @@
                     <i class="fas fa-tachometer-alt mr-3"></i>
                     {{ __('Inicio') }}
                 </a>
+                <a href="{{route('users.index')}}" class="flex items-center text-white py-2 pl-4 nav-item {{request()->is('users') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }}">
+                    <i class="fas fa-table mr-3"></i>
+                    {{ __('Usuarios') }}
+                </a>
                 <a href="{{route('categorias.index')}}" class="flex items-center text-white py-2 pl-4 nav-item {{request()->is('categorias') ? 'active-nav-link' : 'opacity-75 hover:opacity-100' }}">
                     <i class="fas fa-sticky-note mr-3"></i>
                     {{ __('Categorías') }}
@@ -128,6 +149,7 @@
                     <i class="fas fa-table mr-3"></i>
                     {{ __('Productos') }}
                 </a>
+                
             </nav>
         </header>
     
@@ -141,7 +163,7 @@
     </div>
 
     <!-- AlpineJS -->
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"></script>
     <!-- Font Awesome -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
     <!-- ChartJS -->
@@ -153,8 +175,25 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>-->
 
     @yield('js')
-    
     <script>
+         $('nav a').on('click', function(){
+            $('a.active-nav-link').removeClass('active-nav-link');
+            $(this).addClass('active-nav-link');
+        });
+
+        $('.dropdownContent').hide();
+
+        function showMenu(){
+            $('#options-menu').on('click', function(){           
+                if($('.dropdownContent').is(':hidden') == true) {
+                    $('.dropdownContent').show();
+                }else{
+                    $('.dropdownContent').hide();
+                }
+            });
+        }
+    </script>
+    <script>       
         var chartOne = document.getElementById('chartOne');
         var myChart = new Chart(chartOne, {
             type: 'bar',
@@ -229,12 +268,7 @@
                     }]
                 }
             }
-        });
-
-        $('nav a').on('click', function(){
-            $('a.active-nav-link').removeClass('active-nav-link');
-            $(this).addClass('active-nav-link');
-        });
+        });        
     </script>
 </body>
 </html>

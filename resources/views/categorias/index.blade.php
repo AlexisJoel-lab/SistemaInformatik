@@ -33,10 +33,10 @@
             <table class="min-w-full bg-white">
                 <thead class="bg-gray-800 text-white">
                     <tr>
-                        <th class="w-10 text-left py-3 px-4 uppercase font-semibold text-sm text-center">{{__('ID')}}</th>
-                        <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Nombre de la Categoría')}}</th>
-                        <th class="w-1/2 text-left py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Descripción')}}</th>
-                        <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Acciones')}}</th>
+                        <th class="w-10 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('ID')}}</th>
+                        <th class="w-1/5 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Nombre de la Categoría')}}</th>
+                        <th class="w-1/2 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Descripción')}}</th>
+                        <th class="w-2/5 py-3 px-4 uppercase font-semibold text-sm text-center">{{__('Acciones')}}</th>
                     </tr>
                 </thead>
                 <tbody class="text-gray-700">

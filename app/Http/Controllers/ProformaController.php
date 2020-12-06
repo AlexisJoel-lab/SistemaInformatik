@@ -3,6 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App;
+use App\Models\producto;
+use App\Mail\ProformaMailable;
+use App\Models\camExterna;
+use App\Models\camInterna;
+use App\Models\disco;
+use App\Models\grabador;
+use Illuminate\Support\Facades\Mail;
 
 class ProformaController extends Controller
 {
@@ -11,12 +19,15 @@ class ProformaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $total = 0;
-        $precio = 0;
-
-        return view('proformas.index');
+        $grabadors = grabador::all();
+        $discos = disco::all();
+        $camExternas = camExterna::all();
+        $camInternas = camInterna::all();
+        
+        /* $productos = producto::all('categoria_id','nombre','precio')->where('id',$producto->id)->first(); */
+        return view('proformas.index', compact('grabadors', 'discos','camExternas','camInternas'));
     }
 
     /**
@@ -37,7 +48,15 @@ class ProformaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required',
+        ]);
+
+        $correo = new ProformaMailable($request->all());
+        Mail::to($request['email'])->send($correo);
+        return redirect()->route('proforma.index')->with('info','Proforma enviada');
     }
 
     /**
@@ -84,4 +103,5 @@ class ProformaController extends Controller
     {
         //
     }
+
 }

@@ -32,167 +32,199 @@
         </svg>
     </div>
 
-    <section class="bg-white border-b py-8 text-gray-800" onchange="ShowSelected();">
-        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">Proforma</h1>
-        <div class="w-full mb-8">	
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-        </div>
-
-        <div class="w-4/5 md:w-3/5 mx-auto">
-            <!-- <div class="flex mb-4">
-                <div class="w-1/2 p-2 bg-gray-400 text-center">
-                    <input type="radio" name="kit" value="4" checked>
-                    <label class="inline text-gray-700 text-sm font-bold mb-2 uppercase">{{__('4')}}</label>
-                    
-                    <input type="radio" name="kit" value="8">
-                    <label class="inline text-gray-700 text-sm font-bold mb-2 uppercase">{{__('8')}}</label>
-
-                    <input type="radio" name="kit" value="16">
-                    <label class="inline text-gray-700 text-sm font-bold mb-2 uppercase">{{__('16')}}</label>
-                </div>
-                <div class="w-1/2 p-2 bg-gray-500 text-center">
-                    <input type="radio" name="resolucion" value="hd" checked>
-                    <label class="inline text-gray-700 text-sm font-bold mb-2 uppercase">{{__('HD')}}</label>
-                    
-                    <input type="radio" name="resolucion" value="fullHd">
-                    <label class="inline text-gray-700 text-sm font-bold mb-2 uppercase">{{__('Full HD')}}</label>
-                </div>
-            </div> -->
-
-            <div class="flex mb-8 relative">
-                <select name="valor" id="valor" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    <option value="0">******** SELECCIONAR KIT ********</option>
-                    <option value="1">KIT DE 4 CÁMARAS HD + INSTALACIÓN</option>
-                    <option value="2">KIT DE 8 CÁMARAS HD + INSTALACIÓN</option>                    
-                </select>
-                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                </div>
+    <form action="{{ route('proformas.store') }}" method="POST">
+        @csrf 
+        <section class="bg-white border-b py-8 text-gray-800" id="proforma">
+            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">{{ __('Proforma') }}</h1>
+            <div class="w-full mb-8">	
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
             </div>
 
-            <div class="overflow-auto mb-8">
-                <table class="min-w-full bg-white">
-                    <thead>
-                        <tr>
-                            <th class="px-4 py-2">Cantidad</th>
-                            <th class="px-4 py-2">Categoria</th>
-                            <th class="px-4 py-2">Producto</th>                    
-                            <th class="px-4 py-2">Precio</th>
-                            <th class="px-4 py-2">Total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>                            
-                            <td class="px-4 py-2">
-                                <input class="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none" id="cantGrab" name="cantGrab" type="number" min="0" value="1">
-                            </td>
-                            <td class="px-4 py-2">
-                                <label class="block text-gray-700 text-md mb-2" id="catGrab">Grabador</label>
-                            </td>                    
-                            <td class="px-4 py-2">                                
-                                <div class="relative">
-                                    <select name="grabador_id" id="grabador_id" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">                                        
-                                        @foreach ($grabadors as $grabador)    
-                                            <option value="{{$grabador->id}}">{{ $grabador->nombre }}</option>
-                                        @endforeach
-                                    </select>
-                                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+            <div class="w-4/5 md:w-3/5 mx-auto">
+                <div class="flex mb-8 relative">
+                    <select name="kit" id="kit" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="ShowSelected();">
+                        <option value="0">******** SELECCIONAR KIT ********</option>
+                        <option value="KIT DE 4 CÁMARAS HD + INSTALACIÓN">KIT DE 4 CÁMARAS HD + INSTALACIÓN</option>
+                        <option value="KIT DE 8 CÁMARAS HD + INSTALACIÓN">KIT DE 8 CÁMARAS HD + INSTALACIÓN</option>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+
+                <div class="overflow-auto mb-8">
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="w-10 px-4 py-2">Cantidad</th>
+                                <th class="px-4 py-2">Categoria</th>
+                                <th class="px-4 py-2">Producto</th>                    
+                                <th class="px-4 py-2">Precio</th>
+                                <th class="px-4 py-2">Total</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                            
+                                <td class="px-4 py-2">
+                                    <input class="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none" id="cantGrab" name="cantGrab" type="number" min="0" value="1" onchange="totalGrab(this.value);">
+                                </td>
+                                <td class="px-4 py-2">
+                                    <label class="block text-gray-700 text-md" id="catGrab">{{ __('Grabador') }}</label>
+                                </td>                    
+                                <td class="px-4 py-2">                                
+                                    <div class="relative">
+                                        <select name="grabador_id" id="grabador_id" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="selectGrab();">                                        
+                                            @foreach ($grabadors as $grabador)    
+                                                <option value="{{$grabador->id}}">{{ $grabador->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
                                     </div>
-                                </div>
-                            </td>
-                            <td class="px-4 py-2">
-                                <span>S/.</span>
-                                <label class="block text-gray-700 text-md mb-2" id="precGrab">{{ $grabador->precio }}</label>
-                            </td>
-                            <td class="px-4 py-2 flex">
-                                <span>S/.</span>
-                                <label class="block text-gray-700 text-md mb-2" id="totalGrab"> </label>
-                            </td>
-                            
-                        </tr>
-                        <tr class="bg-gray-100">
-                            <td class="px-4 py-2">
-                                <input class="appearance-none rounded w-full bg-gray-100 text-gray-700 leading-tight focus:outline-none" id="cantHdd" name="cantHdd" type="number" min="0" value="1">
-                            </td>
-                            <td class="px-4 py-2">Disco Duro</td>
-                            <td class="px-4 py-2">HDD 1TB WESTERN DIGITAL</td>
-                            <td class="px-4 py-2">S/. 190</td>
-                            <td class="px-4 py-2">
-                                <span>S/. </span>
-                                <label class="block text-gray-700 text-md mb-2" id="total2"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">
-                                <input class="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none" id="num1" name="num1" type="number" min="0" max="8" value="0">
-                            </td>
-                            <td class="px-4 py-2">Cámara interior</td>
-                            <td class="px-4 py-2">DOMO PLASTICO 720P</td>
-                            <td class="px-4 py-2">S/. 65</td>
-                            <td class="px-4 py-2">
-                                <span>S/. </span>
-                                <label class="block text-gray-700 text-md mb-2" id="total3"></label>
-                            </td>
-                        </tr>
-                        <tr class="bg-gray-100">
-                            <td class="px-4 py-2">
-                                <input class="appearance-none rounded w-full bg-gray-100 text-gray-700 leading-tight focus:outline-none" id="num2" name="num2" type="number"min="0" max="8" value="0">
-                            </td>
-                            <td class="px-4 py-2">Cámara exterior</td>
-                            <td class="px-4 py-2">TUBO PLASTICO 720P</td>
-                            <td class="px-4 py-2">S/. 65</td>
-                            <td class="px-4 py-2">
-                                <span>S/. </span>
-                                <label class="block text-gray-700 text-md mb-2" id="total4"></label>
-                            </td>
-                        </tr>
-                        <tr class="bg-gray-100">
-                            <td class="px-4 py-2">
-                                <input class="appearance-none rounded w-full bg-gray-100 text-gray-700 leading-tight focus:outline-none" id="num2" name="num2" type="number"min="0" max="8" value="0">
-                            </td>
-                            <td class="px-4 py-2">Otros</td>
-                            <td class="px-4 py-2">TUBO PLASTICO 720P</td>
-                            <td class="px-4 py-2">S/. 65</td>
-                            <td class="px-4 py-2">
-                                <span>S/. </span>
-                                <label class="block text-gray-700 text-md mb-2" id="total4"></label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="px-4 py-2">
-                                <input id="check" type="checkbox" class="form-checkbox" onclick="checkup();" value="1">
-                            </td>
-                            <td class="px-4 py-2">Audio</td>
-                            <td class="px-4 py-2">MICROFONO, ACCESORIOS, INSTALACION</td>
-                            <td class="px-4 py-2">S/. 60</td>
-                            <td class="px-4 py-2 flex">
-                                <span>S/. </span>
-                                <label class="block text-gray-700 text-md mb-2" id="aud">0</label>
-                            </td>
-                        </tr>
-                        
-                    </tbody>
-                </table>
-            </div>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="precGrab" onchange="totalGrab(this.value);">160</span>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="totalGrab" onchange="totalProforma(this.value);">160</span>
+                                </td>                            
+                            </tr>
+                            <tr class="bg-gray-100">
+                                <td class="px-4 py-2">
+                                    <input class="appearance-none rounded w-full bg-gray-100 text-gray-700 leading-tight focus:outline-none" id="cantDisco" name="cantDisco" type="number" min="0" value="1" onchange="totalDisco(this.value);">
+                                </td>
+                                <td class="px-4 py-2">
+                                    <label class="block text-gray-700 text-md" id="catDisco">{{ __('Disco Duro') }}</label>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <div class="relative">
+                                        <select name="disco_id" id="disco_id" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="selectDisco();">                                        
+                                            @foreach ($discos as $disco)    
+                                                <option value="{{$disco->id}}">{{ $disco->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="precDisco" onchange="totalDisco(this.value);">190</span>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/. </span>
+                                    <span class="text-gray-700 text-md mb-2" id="totalDisco" onchange="totalProforma(this.value);">190</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2">
+                                    <input class="appearance-none rounded w-full text-gray-700 leading-tight focus:outline-none" id="cantCamInt" name="cantCamInt" type="number" min="0" max="8" value="0" onchange="totalCamInt(this.value);">
+                                </td>
+                                <td class="px-4 py-2">
+                                    <label class="block text-gray-700 text-md" id="catCamInt">{{ __('Cámara interior') }}</label>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <div class="relative">
+                                        <select name="camInt_id" id="camInt_id" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="selectCamInt(this.value);">                                        
+                                            @foreach ($camInternas as $item)    
+                                                <option value="{{$item->id}}">{{ $item->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="precCamInt" onchange="totalCamInt(this.value);">65</span>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/. </span>
+                                    <span class="text-gray-700 text-md mb-2" id="totalCamInt" onchange="totalProforma(this.value);">65</span>
+                                </td>
+                            </tr>
+                            <tr class="bg-gray-100">
+                                <td class="px-4 py-2">
+                                    <input class="appearance-none rounded w-full bg-gray-100 text-gray-700 leading-tight focus:outline-none" id="cantCamExt" name="cantCamExt" type="number"min="0" max="8" value="0" onchange="totalCamExt(this.value);">
+                                </td>
+                                <td class="px-4 py-2">
+                                    <label class="block text-gray-700 text-md" id="catCamExt">{{ __('Cámara exterior') }}</label>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <div class="relative">
+                                        <select name="camExt_id" id="camExt_id" data-dependent="" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="selectCamExt(this.value);">                                        
+                                            @foreach ($camExternas as $item)    
+                                                <option value="{{$item->id}}">{{ $item->nombre }}</option>
+                                            @endforeach
+                                        </select>
+                                        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                                            <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="precCamExt" onchange="totalCamExt(this.value);">65</span>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="totalCamExt" onchange="totalProforma(this.value);">65</span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="px-4 py-2">
+                                    <span class="text-gray-700 text-md mb-2" id="cantOtros" name="cantOtros" onchange="totalOtros();">0</span>                                
+                                </td>
+                                <td class="px-4 py-2">
+                                    <label class="block text-gray-700 text-md" id="catGrab">{{ __('Otros') }}</label>
+                                </td>
+                                <td class="px-4 py-2">ACCESORIOS, CABLEADO, INSTALACIÓN</td>
+                                <td class="px-4 py-2">
+                                    <span>S/.</span>
+                                    <span class="text-gray-700 text-md mb-2" id="precOtros"></span>
+                                </td>
+                                <td class="px-4 py-2">
+                                    <span>S/. </span>
+                                    <span class="text-gray-700 text-md mb-2" id="totalOtros" onchange="totalProforma(this.value);">0</span>
+                                </td>
+                            </tr>
+                            <tr class="bg-gray-100">
+                                <td class="px-4 py-2">
+                                    <input id="check" type="checkbox" class="form-checkbox" onclick="checkup();" value="1">
+                                </td>
+                                <td class="px-4 py-2">Audio</td>
+                                <td class="px-4 py-2">MICROFONO, ACCESORIOS, INSTALACIÓN</td>
+                                <td class="px-4 py-2">S/. 60</td>
+                                <td class="px-4 py-2">
+                                    <span>S/. </span>
+                                    <span class="text-gray-700 text-md mb-2" id="aud" onchange="totalProforma(this.value);">0</span>
+                                </td>
+                            </tr>                        
+                        </tbody>
+                    </table>
+                </div>
 
-            <div class="flex justify-end">
-                <label class="block text-gray-700 text-3xl mb-2 uppercase" id="totalF"><span>S/. </span></label>
+                <div class="flex justify-end">
+                    <span class="block text-gray-700 text-5xl mb-2 uppercase">S/. </span>
+                    <input type="text" class="block text-gray-700 text-5xl mb-2 w-24 bg-white" id="precio" name="precio" disabled>
+                    <!-- <span class="block text-gray-700 text-5xl mb-2 uppercase" id="precio" name="precio" >0</span> -->
+                </div>
             </div>
-            <!-- <label class="block text-gray-700 text-sm font-bold mb-2 uppercase" id="texto"></label> -->
-        </div>
-    </section>
-    <section class="bg-white border-b py-8 text-gray-800">
-        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">Dejanos tus datos</h1>
-        <div class="w-full mb-8">	
-            <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
-        </div>
-        <div class="w-4/5 sm:w-3/5 mx-auto">
-            <form class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" action="{{ route('proforma.store') }}" method="POST">
-                @csrf      
+        </section>
 
+        <section class="bg-white border-b py-8 text-gray-800">
+            <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">Dejanos tus datos</h1>
+            <div class="w-full mb-8">	
+                <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
+            </div>
+            <div class="w-4/5 sm:w-3/5 mx-auto bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
                 <div class="mb-3">
-                    <label class="block text-gray-700 text-sm font-bold mb-2 uppercase">{{__('Nombre')}}<samp class="text-red-500">*</samp></label>
+                    <label class="block text-gray-700 text-sm font-bold mb-2 uppercase">{{__('Nombre y Apellidos')}}<samp class="text-red-500">*</samp></label>
                     <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="nombre" name="nombre" type="text" value="{{old('nombre')}}">            
                     @error('nombre')
                         <div class="mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">                        
@@ -209,8 +241,8 @@
 
                 <div class="mb-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2 uppercase">{{__('Correo electrónico')}}<samp class="text-red-500">*</samp></label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" name="email" type="email" value="{{old('email')}}">
-                    @error('email')
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="correo" name="correo" type="email" value="{{old('correo')}}">
+                    @error('correo')
                         <div class="mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">                        
                             <span class="block sm:inline">{{ $message }}</span>
                             <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -225,8 +257,8 @@
 
                 <div class="mb-3">
                     <label class="block text-gray-700 text-sm font-bold mb-2 uppercase">{{__('Celular')}}<samp class="text-red-500">*</samp></label>
-                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="phone" name="phone" type="text" value="{{old('phone')}}" maxlength="9" onkeypress='return validaNumericos(event)'>
-                    @error('phone')
+                    <input class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="celular" name="celular" type="text" value="{{old('celular')}}" maxlength="9" onkeypress='return validaNumericos(event)'>
+                    @error('celular')
                         <div class="mt-2 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">                        
                             <span class="block sm:inline">{{ $message }}</span>
                             <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
@@ -240,92 +272,260 @@
                 </div>
 
                 <div class="flex items-center justify-center">
-                    <button id="form" class="bg-green-500 hover:bg-green-400 text-white font-bold mx-1 py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded focus:outline-none" type="submit">
-                        <i class="fas fa-whatsapp-square xl:mr-2"></i>{{ __('WhatsApp') }}
+                    <button id="form" class="bg-red-500 hover:bg-red-400 text-white font-bold mx-1 py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded focus:outline-none" type="submit">
+                        <i class="fas fa-envelope-square mr-2"></i>{{ __('Correo') }}
                     </button>
-                    <a href="{{route('categorias.index')}}" class="bg-red-500 hover:bg-red-400 text-white font-bold mx-1 py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="reset">
+                    <!-- <a href="{{route('categorias.index')}}" class="bg-red-500 hover:bg-red-400 text-white font-bold mx-1 py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded" type="reset">
                         <i class="fas fa-envelope-square xl:mr-2"></i>{{ __('Correo') }}
-                    </a>            
+                    </a>  -->           
                 </div>
-            </form>
-            @if ($errors)
-                <script>
-                    var scrollpos = window.scrollY;
-                    document.addEventListener('wheel', function() {
-                        scrollpos = 400;
-                    });
-                </script>
-            @endif
-            @if (session('info'))
-                <script>
-                    Swal.fire(
-                        '¡Enviado!',
-                        'Tu registro a sido eliminado exitosamente.',
-                        'success'
-                    )
-                </script>
-            @endif
-
-        </div>
-    </section>
+                    <!-- <a href="https://api.whatsapp.com/send?phone=51954424137&text=hola,%20¿qué%20tal%20estás?" class="fas fa-envelope-square xl:mr-2"></a> -->
+            </div>
+        </section>
+    </form>
 @endsection
 @section('js')
 
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 
-<script type="text/javascript">
-    
-    var audio = 60;
-    var accesorios = 22;
-    var cableado = 28;
-    var otros = 45;
+    <script type="text/javascript">
 
-    function ShowSelected(){
-        /* Para obtener el valor */
-        var val = document.getElementById("valor").value;
+        var audio = 60;
+        var accesorios = 22;
+        var cableado = 28;
+        var otros = 45;
+        var r = 0;
+
+        document.getElementById("precOtros").innerText = (parseInt(accesorios) + parseInt(cableado) + parseInt(otros));
+        totalProforma();
         
-        if (val == 1) {
-            document.getElementById("num1").value = 2;
-            document.getElementById("num2").value = 2;
-        }else if (val == 2) {
-            document.getElementById("num1").value = 4;
-            document.getElementById("num2").value = 4;
-        }
-               
-        /* Para obtener el texto */
-        /* var combo = document.getElementById("valor");
-        var selected = combo.options[combo.selectedIndex].text;
-        alert(selected); */
-    }
+        function totalGrab(){
+            m1 = document.getElementById("cantGrab").value;
+            m2 = document.getElementById("precGrab").innerText;
+            r = m1*m2;
+            document.getElementById("totalGrab").innerHTML = r;
 
-    function checkup(){
-        var ck = document.getElementById("check");
+            totalProforma();
+        }
+
+        function totalDisco(){
+            m1 = document.getElementById("cantDisco").value;
+            m2 = document.getElementById("precDisco").innerText;
+            r = m1*m2;
+            document.getElementById("totalDisco").innerHTML = r;
+
+            totalProforma();
+        }
+
+        function totalCamInt(){
+
+            sumaOtros();
+
+            m1 = document.getElementById("cantCamInt").value;
+            m2 = document.getElementById("precCamInt").innerText;
+            r = m1*m2;
+            document.getElementById("totalCamInt").innerHTML = r;
+
+            totalProforma();
+        }
+
+        function totalCamExt(){
+            
+            sumaOtros();
+
+            m1 = document.getElementById("cantCamExt").value;
+            m2 = document.getElementById("precCamExt").innerText;
+            r = m1*m2;
+            document.getElementById("totalCamExt").innerHTML = r;
+
+            totalProforma();
+        }
+
+        function totalOtros(){
+            var m1 = 0;
+            var m2 = 0;
+
+            m1 = document.getElementById("cantOtros").innerHTML;
+            m2 = document.getElementById("precOtros").innerHTML;
+            r = (parseInt(m1) * parseInt(m2));
+            document.getElementById("totalOtros").innerHTML = r;
+
+            totalProforma();
+        }
         
-        if (ck.checked == true) {
-            document.getElementById("aud").innerHTML = audio;
-        }else if (ck.checked == false){
-            document.getElementById("aud").innerHTML = 0;
-        }
-    }
+        function ShowSelected(){
+            /* Para obtener el valor */
+            var val = document.getElementById("kit").value;
+            var n1 = 0;
+            var n2 = 0;
 
-    function validaNumericos(event) {
-        if(event.charCode >= 48 && event.charCode <= 57){
-            return true;
+            if (val == "KIT DE 4 CÁMARAS HD + INSTALACIÓN") {
+                document.getElementById("cantCamInt").value = 2;
+                document.getElementById("cantCamExt").value = 2;
+
+                n1 = document.getElementById("cantCamInt").value;
+                n2 = document.getElementById("cantCamExt").value;
+                r = (parseInt(n1) + parseInt(n2));
+                document.getElementById("cantOtros").innerHTML = r;
+
+                totalCamInt();
+                totalCamExt();
+                totalOtros();
+                totalProforma();
+            }else if (val == "KIT DE 8 CÁMARAS HD + INSTALACIÓN") {
+                document.getElementById("cantCamInt").value = 4;
+                document.getElementById("cantCamExt").value = 4;
+
+                n1 = document.getElementById("cantCamInt").value;
+                n2 = document.getElementById("cantCamExt").value;
+                r = (parseInt(n1) + parseInt(n2));
+                document.getElementById("cantOtros").innerHTML = r;
+
+                totalCamInt();
+                totalCamExt();
+                totalOtros();
+                totalProforma();
+            }               
+            /* Para obtener el texto */
+            /* var combo = document.getElementById("valor");
+            var selected = combo.options[combo.selectedIndex].text;
+            alert(selected); */
         }
-        return false;        
-    }
-    
-    /* function validaNumericos(){
-        var inputtxt = document.getElementById('phone'); 
-        var valor = inputtxt.value;
-        for(i=0;i<valor.length;i++){
-            var code=valor.charCodeAt(i);
-            if(code<=48 || code>=57){          
-                inputtxt.value=""; 
-                return;
-            }    
-        }        
-    } */
-    
-</script>
+
+        function sumaOtros(){
+            var n1 = 0;
+            var n2 = 0;
+            
+            n1 = document.getElementById("cantCamInt").value;
+            n2 = document.getElementById("cantCamExt").value;
+            r = (parseInt(n1) + parseInt(n2));
+            document.getElementById("cantOtros").innerHTML = r;
+        }
+
+        function selectGrab(){
+            var precioGrab = document.getElementById("grabador_id").value;
+            
+            if (precioGrab == 1) {
+                document.getElementById("precGrab").innerHTML = 160;
+                totalGrab();
+                totalProforma();
+            }else if (precioGrab == 2) {
+                document.getElementById("precGrab").innerHTML = 220;
+                totalGrab();
+                totalProforma();
+            }
+        }
+
+        function selectDisco(){
+            var precioDisco = document.getElementById("disco_id").value;
+            
+            if (precioDisco == 1) {
+                document.getElementById("precDisco").innerHTML = 190;
+                totalDisco();
+                totalProforma();
+            }else if (precioDisco == 2) {
+                document.getElementById("precDisco").innerHTML = 280;
+                totalDisco();
+                totalProforma();
+            }
+        }
+
+        function selectCamInt(){
+            var precioCantInt = document.getElementById("camInt_id").value;
+            
+            if (precioCantInt == 1) {
+                document.getElementById("precCamInt").innerHTML = 65;
+                totalCamInt();
+                totalProforma();
+            }else if (precioCantInt == 2) {
+                document.getElementById("precCamInt").innerHTML = 90;
+                totalCamInt();
+                totalProforma();
+            }
+        }
+
+        function selectCamExt(){
+            var precioCantExt = document.getElementById("camExt_id").value;
+            
+            if (precioCantExt == 1) {
+                document.getElementById("precCamExt").innerHTML = 65;
+                totalCamExt();
+                totalProforma();
+            }else if (precioCantExt == 2) {
+                document.getElementById("precCamExt").innerHTML = 90;
+                totalCamExt();
+                totalProforma();
+            }
+        }
+        
+        function checkup(){
+            var ck = document.getElementById("check");
+            
+            if (ck.checked == true) {
+                document.getElementById("aud").innerHTML = audio;
+                totalProforma();
+            }else if (ck.checked == false){
+                document.getElementById("aud").innerHTML = 0;
+                totalProforma();
+            }
+        }
+
+        function validaNumericos(event) {
+            if(event.charCode >= 48 && event.charCode <= 57){
+                return true;
+            }
+            return false;        
+        }
+        
+        function totalProforma(){
+            /* var totalSuma = 0;
+            valor = parseInt(valor);
+
+            totalSuma = document.getElementById("totalProforma").innerHTML;
+            totalSuma = (totalSuma == null || totalSuma == undefined || totalSuma == "") ? 0 : totalSuma;
+            totalSuma = (parseInt(totalSuma) + parseInt(valor));
+
+            document.getElementById('totalProforma').innerHTML = totalSuma; */
+            var n1 = 0;
+            var n2 = 0;
+            var n3 = 0;
+            var n4 = 0;
+            var n5 = 0;
+            var n6 = 0;
+
+
+            n1 = document.getElementById("totalGrab").innerText;
+            n2 = document.getElementById("totalDisco").innerText;
+            n3 = document.getElementById("totalCamInt").innerText;
+            n4 = document.getElementById("totalCamExt").innerText;
+            n5 = document.getElementById("totalOtros").innerText;
+            n6 = document.getElementById("aud").innerText;
+            r = (parseInt(n1) + parseInt(n2) + parseInt(n3) + parseInt(n4) + parseInt(n5) + parseInt(n6));
+            document.getElementById("precio").value = r;
+
+        }
+
+        /* function validaNumericos(){
+            var inputtxt = document.getElementById('phone'); 
+            var valor = inputtxt.value;
+            for(i=0;i<valor.length;i++){
+                var code=valor.charCodeAt(i);
+                if(code<=48 || code>=57){          
+                    inputtxt.value=""; 
+                    return;
+                }    
+            }        
+        } */    
+
+    </script>
+
+    @if (session('info') == 'ok')
+        <script>    
+            Swal.fire(
+                '¡Proforma enviada!',
+                'Tu proforma a sido enviada a tu correo exitosamente.',
+                'success'
+            )
+        </script>
+    @endif
 @endsection

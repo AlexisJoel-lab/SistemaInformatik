@@ -6,10 +6,10 @@
         <!--Left Col-->
         <div class="flex flex-col w-full md:w-2/5 justify-center items-start text-center md:text-left">
             
-            <h1 class="my-4 text-5xl font-bold leading-tight mx-auto">¡Don Fisgón!</h1>
-            <p class="leading-normal text-2xl mb-8 mx-auto text-center">Un especialista en cámaras de seguridad y vigilancia que lo apoya en el monitoreo a distancia de su hogar o empresa...</p>       
+            <h1 class="my-4 text-5xl font-bold leading-tight mx-auto">{{ __('¡Don Fisgón!') }}</h1>
+            <p class="leading-normal text-2xl mb-8 mx-auto text-center">{{ __('Un especialista en cámaras de seguridad y vigilancia que lo apoya en el monitoreo a distancia de su hogar o empresa...') }}</p>       
 
-            <button class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">Seguir Leyendo... </button>
+            <button class="mx-auto hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg">{{ __('Seguir Leyendo...') }}</button>
             
         </div>
         <!--Right Col-->
@@ -39,14 +39,14 @@
 
 <section class="bg-white border-b py-8">
 <div class="container max-w-5xl mx-auto m-8">
-    <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">Servicios</h1>
+    <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">{{ __('Servicios') }}</h1>
     <div class="w-full mb-4">	
         <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
     </div>
 
     <div class="flex flex-wrap">
         <div class="w-5/6 sm:w-1/2 p-6">
-            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">Doña Cautelosa   </h3>
+            <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">{{ __('Doña Cautelosa') }}</h3>
             <p class="text-gray-600 mb-8">Una fanática de la seguridad que le permite asegurar su hogar o negocio y vigilarlo por internet...</p>
             <button class="bg-gradient-to-b from-green-900 via-green-600 to-green-300 mx-auto hover:underline text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">Seguir Leyendo...</button>
         </div>
@@ -61,12 +61,11 @@
         </div>
         <div class="w-full sm:w-1/2 p-6 mt-6">
             <div class="align-middle">
-                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">Master Wifi</h3>
-                <p class="text-gray-600 mb-8">Un experto en conectividad que lo apoya en la implementación de cualquier red de datos o internet.</p>
+                <h3 class="text-3xl text-gray-800 font-bold leading-none mb-3">{{ __('Master Wifi') }}</h3>
+                <p class="text-gray-600 mb-8">Un experto en conectividad que lo apoya en la implementación de cualquier red de datos o internet.</p>                
                 <button class="bg-gradient-to-b from-orange-700 via-orange-500 to-orange-300 mx-auto hover:underline text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">Seguir Leyendo...</button>
             </div>
         </div>
-
     </div>
 </div>
 </section>
@@ -74,14 +73,14 @@
 <section class="bg-white border-b py-8">
     <div class="container mx-auto flex flex-wrap pt-4 pb-12">
 
-        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">Kit de Cámaras</h1>
+        <h1 class="w-full my-2 text-5xl font-bold leading-tight text-center text-gray-800">{{ __('Kit de Cámaras') }}</h1>
         <div class="w-full mb-4">	
             <div class="h-1 mx-auto gradient w-64 opacity-25 my-0 py-0 rounded-t"></div>
         </div>
 
         <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
+                <a href="{{route('proformas.index')}}" class="flex flex-wrap no-underline hover:no-underline">
                     <p class="w-full text-gray-600 text-xs md:text-sm px-6">KIT DE</p>
                     <div class="w-full font-bold text-xl text-gray-800 px-6">04 CÁMARAS HD + INSTALACIÓN.</div>
                     <p class="text-gray-800 text-base px-6 mb-5">
@@ -95,29 +94,33 @@
             </div>
             <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
                 <div class="flex items-center justify-start">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">Action</button>
+                    <a data-scroll href="{{route('proformas.index')}}" class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">{{ __('Ver Proforma') }}</a>                    
                 </div>
             </div>
         </div>   
         
         <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
-            <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
-                <a href="#" class="flex flex-wrap no-underline hover:no-underline">
-                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">xGETTING STARTED</p>
-                    <div class="w-full font-bold text-xl text-gray-800 px-6">Lorem ipsum dolor sit amet.</div>
+        <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
+                <a href="{{route('proformas.index')}}" class="flex flex-wrap no-underline hover:no-underline">
+                    <p class="w-full text-gray-600 text-xs md:text-sm px-6">KIT DE</p>
+                    <div class="w-full font-bold text-xl text-gray-800 px-6">08 CÁMARAS HD + INSTALACIÓN.</div>
                     <p class="text-gray-800 text-base px-6 mb-5">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at ipsum eu nunc commodo posuere et sit amet ligula. 
+                        - 01 DVR Grabador marca HIKVISION <br>
+                        - 08 CÁMARAS marca HIKVISION <br>
+                        - 01 DISCO de 2Tb marca WESTERN DIGITAL <br>
+                        - INSTALACIÓN (materiales + mano de obra) <br>
+                        - CONFIGURACIÓN para ver por celular y computadora
                     </p>
                 </a>
             </div>
             <div class="flex-none mt-auto bg-white rounded-b rounded-t-none overflow-hidden shadow p-6">
-                <div class="flex items-center justify-center">
-                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">Action</button>
+                <div class="flex items-center justify-start">
+                    <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">Ver Proforma</button>
                 </div>
             </div>
         </div>    
         
-        <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
+        <!-- <div class="w-full md:w-1/3 p-6 flex flex-col flex-grow flex-shrink">
             <div class="flex-1 bg-white rounded-t rounded-b-none overflow-hidden shadow">
                 <a href="#" class="flex flex-wrap no-underline hover:no-underline">
                     <p class="w-full text-gray-600 text-xs md:text-sm px-6">xGETTING STARTED</p>
@@ -132,7 +135,7 @@
                     <button class="mx-auto lg:mx-0 hover:underline gradient text-white font-bold rounded-full my-6 py-4 px-8 shadow-lg">Action</button>
                 </div>
             </div>
-        </div>
+        </div> -->
         
     </div>
 </section>

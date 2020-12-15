@@ -14,7 +14,7 @@ class CreateProformasTable extends Migration
     public function up()
     {
         Schema::create('proformas', function (Blueprint $table) {
-            $table->id();
+            $table->id();           
             $table->timestamps();
         });
     }

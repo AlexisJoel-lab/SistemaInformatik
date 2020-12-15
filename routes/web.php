@@ -34,9 +34,11 @@ Route::resource('categorias', CategoriaController::class);
 
 Route::resource('productos', ProductoController::class);
 
-Route::get('proforma', [ProformaController::class,'index'])->name('proforma.index');
+Route::resource('proformas', ProformaController::class);
 
-Route::post('proforma', [ProformaController::class,'store'])->name('proforma.store');
+/* Route::get('proforma', [ProformaController::class,'index'])->name('proforma.index');
+
+Route::post('proforma', [ProformaController::class,'store'])->name('proforma.store'); */
 
 Route::get('usuarios', [UserController::class,'index'])->name('users.index');
 

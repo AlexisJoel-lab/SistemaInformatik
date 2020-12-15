@@ -50,7 +50,7 @@
 		<div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 lg:bg-transparent text-black p-4 lg:p-0 z-20" id="nav-content">
 			<ul class="list-reset lg:flex justify-end flex-1 items-center">
 				<li class="mr-3">
-					<a id="nav-link1" class="nav-link1 inline-block py-2 px-4 text-gray-300 hover:text-white font-bold no-underline" href="/">Inicio</a>
+					<a id="nav-link1" class="nav-link1 inline-block py-2 px-4 text-gray-300 hover:text-white no-underline {{request()->is('/') ? 'font-bold' : 'font-normal'}}" href="/">Inicio</a>
 				</li>
 				<!-- <li class="mr-3">
 					<a id="nav-link2" class="nav-link1 inline-block text-gray-300 no-underline hover:text-white hover:text-underline py-2 px-4" href="#">Don Fisgón</a>
@@ -62,7 +62,7 @@
 					<a id="nav-link4" class="nav-link1 inline-block text-gray-300 no-underline hover:text-white hover:text-underline py-2 px-4" href="#">Master Wifi</a>
 				</li> -->
 				<li class="mr-3">
-					<a id="nav-link2" class="nav-link1 inline-block text-gray-300 no-underline hover:text-white hover:text-underline py-2 px-4" href="{{route('proforma.index')}}">PROFORMA</a>
+					<a id="nav-link2" class="nav-link1 inline-block text-gray-300 no-underline hover:text-white hover:text-underline py-2 px-4 {{request()->is('proforma') ? 'font-bold' : 'font-normal'}}" href="{{route('proformas.index')}}">PROFORMA</a>
 				</li>
             </ul>
             @if (Route::has('login'))

@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App;
-use App\Models\producto;
 use App\Mail\ProformaMailable;
 use App\Models\camExterna;
 use App\Models\camInterna;
 use App\Models\disco;
 use App\Models\grabador;
+use App\Models\proforma;
 use Illuminate\Support\Facades\Mail;
 
 class ProformaController extends Controller
@@ -37,7 +37,7 @@ class ProformaController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -50,13 +50,15 @@ class ProformaController extends Controller
     {
         $request->validate([
             'nombre' => 'required',
-            'email' => 'required|email',
-            'phone' => 'required',
+            'correo' => 'required|email',
+            'celular' => 'required',
         ]);
 
         $correo = new ProformaMailable($request->all());
-        Mail::to($request['email'])->send($correo);
-        return redirect()->route('proforma.index')->with('info','Proforma enviada');
+        Mail::to($request['correo'])->send($correo);
+
+        proforma::create($request->only('kit','precio','nombre','correo','celular'));
+        return redirect()->route('proformas.index')->with('info','ok');
     }
 
     /**
